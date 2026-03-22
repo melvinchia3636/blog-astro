@@ -1,0 +1,68 @@
+---
+import Layout from '../layouts/Layout.astro';
+import StatusLine from '../components/StatusLine';
+import PostCard from '../components/PostCard';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('posts')).sort(
+  (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
+---
+
+<Layout title="Melvin's Life Journal">
+  <main class="px-6 py-4">
+    <div class="mb-2">
+      <StatusLine client:load directory="~/blog/posts" />
+      <div class="home-command flex items-center opacity-0">
+        <span class="text-segment-magenta font-bold">❯</span>
+        <span class="ml-2 text-text-primary">ls -la</span>
+      </div>
+    </div>
+    <div class="font-mono text-sm whitespace-wrap">
+      <div class="home-dir-header text-text-muted py-0.5 opacity-0">
+        total {posts.length}
+      </div>
+      <div class="home-dir-header py-0.5 opacity-0">
+        <span class="text-text-muted">drwxr-xr-x</span>{"  "}
+        <span class="text-segment-yellow">melvin</span>{"  "}
+        <span class="text-segment-green">{"  4.0K"}</span>{"  "}
+        <span class="text-segment-blue">Dec 18</span>{"  "}
+        <span class="text-segment-blue">..</span>
+      </div>
+
+      <!-- Posts list -->
+      {posts.map((post) => (
+        <PostCard
+          slug={post.id.replace(/\/index$/, '')}
+          excerpt={post.data.excerpt}
+          date={post.data.date}
+          contentLength={post.body?.length ?? 0}
+        />
+      ))}
+    </div>
+
+    <!-- New prompt -->
+    <div class="home-prompt mt-4">
+      <StatusLine client:load directory="~/blog/posts" />
+      <div class="home-prompt-cursor flex items-center opacity-0">
+        <span class="text-segment-magenta font-bold">❯</span>
+        <span class="cursor"></span>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const { staggerFadeIn, slideInLeft, slideInRight } = (window as any).__animations;
+
+      slideInLeft(".status-left", 100);
+      slideInRight(".status-right", 100);
+      slideInLeft(".home-command", 250);
+      staggerFadeIn(".home-dir-header", 350);
+      staggerFadeIn(".post-card", 500);
+      slideInLeft(".home-prompt .status-left", 700);
+      slideInRight(".home-prompt .status-right", 700);
+      slideInLeft(".home-prompt-cursor", 850);
+    });
+  </script>
+</Layout>

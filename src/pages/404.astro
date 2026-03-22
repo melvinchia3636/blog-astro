@@ -1,0 +1,93 @@
+---
+import Layout from '../layouts/Layout.astro';
+import StatusLine from '../components/StatusLine';
+---
+
+<Layout title="404 — Not Found">
+  <main class="px-6 py-4">
+    <!-- Status line + Command -->
+    <div class="notfound-status mb-2">
+      <StatusLine client:load directory="~/blog" />
+    </div>
+
+    <div class="notfound-command flex items-center mb-4 opacity-0">
+      <span class="text-segment-magenta font-bold">❯</span>
+      <span class="ml-2 text-text-primary">cd <span id="notfound-path"></span></span>
+    </div>
+
+    <!-- Error output -->
+    <div class="space-y-2 mb-6">
+      <div class="notfound-error text-segment-red opacity-0">
+        zsh: cd: <span id="notfound-error-path"></span>: No such file or directory
+      </div>
+      <div class="notfound-error text-segment-yellow opacity-0">
+        Error: ENOENT - path not found
+      </div>
+    </div>
+
+    <!-- ASCII art 404 -->
+    <div class="notfound-ascii opacity-0 my-8">
+      <pre class="text-segment-cyan text-xs sm:text-sm leading-tight">{`
+   ██╗  ██╗ ██████╗ ██╗  ██╗
+   ██║  ██║██╔═████╗██║  ██║
+   ███████║██║██╔██║███████║
+   ╚════██║████╔╝██║╚════██║
+        ██║╚██████╔╝     ██║
+        ╚═╝ ╚═════╝      ╚═╝
+`}</pre>
+    </div>
+
+    <!-- Suggestion -->
+    <div class="text-text-secondary mb-6">
+      <div class="text-text-muted mb-2">Try one of these commands:</div>
+      <div class="ml-4 space-y-1">
+        <div>
+          <span class="text-segment-cyan">$</span>
+          <a href="/" class="ml-2 text-segment-blue hover:text-segment-magenta transition-colors hover:underline">
+            cd ~/blog/posts
+          </a>
+          <span class="text-text-muted ml-4"># Go to home</span>
+        </div>
+        <div>
+          <span class="text-segment-cyan">$</span>
+          <span class="ml-2 text-text-muted">ls -la ~/blog/posts</span>
+          <span class="text-text-muted ml-4"># List all posts</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- New prompt -->
+    <div class="notfound-prompt mt-8">
+      <StatusLine client:load directory="~/blog" />
+      <div class="notfound-cursor flex items-center opacity-0">
+        <span class="text-segment-magenta font-bold">❯</span>
+        <a href="/" class="ml-2 text-segment-cyan hover:underline">
+          cd posts
+        </a>
+        <span class="cursor ml-1"></span>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Set current pathname in the 404 page
+    const pathname = window.location.pathname;
+    const pathEl = document.getElementById('notfound-path');
+    const errorPathEl = document.getElementById('notfound-error-path');
+    if (pathEl) pathEl.textContent = pathname;
+    if (errorPathEl) errorPathEl.textContent = pathname;
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const { staggerFadeIn, fadeIn, slideInLeft, slideInRight } = (window as any).__animations;
+
+      slideInLeft(".notfound-status .status-left", 100);
+      slideInRight(".notfound-status .status-right", 100);
+      slideInLeft(".notfound-command", 200);
+      staggerFadeIn(".notfound-error", 400);
+      fadeIn(".notfound-ascii", 600);
+      slideInLeft(".notfound-prompt .status-left", 900);
+      slideInRight(".notfound-prompt .status-right", 900);
+      slideInLeft(".notfound-cursor", 1000);
+    });
+  </script>
+</Layout>

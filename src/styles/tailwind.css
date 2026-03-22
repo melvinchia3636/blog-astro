@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+@theme {
+  /* One Dark Pro colors */
+  --color-bg-primary: #282c34;
+  --color-bg-secondary: #21252b;
+  --color-bg-tertiary: #2c313a;
+
+  --color-text-primary: #abb2bf;
+  --color-text-secondary: #828997;
+  --color-text-muted: #5c6370;
+
+  /* One Dark Pro accent colors */
+  --color-segment-blue: #61afef;
+  --color-segment-cyan: #56b6c2;
+  --color-segment-green: #98c379;
+  --color-segment-yellow: #e5c07b;
+  --color-segment-magenta: #c678dd;
+  --color-segment-red: #e06c75;
+  --color-segment-orange: #d19a66;
+
+  --color-border: #3e4451;
+}
