@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import StatusLine from '../components/StatusLine';
 import PostCard from '../components/PostCard';
 import { getCollection } from 'astro:content';
+import dayjs from 'dayjs';
 
 const posts = (await getCollection('posts')).sort(
   (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
@@ -26,7 +27,7 @@ const posts = (await getCollection('posts')).sort(
         <span class="text-text-muted">drwxr-xr-x</span>{"  "}
         <span class="text-segment-yellow">melvin</span>{"  "}
         <span class="text-segment-green">{"  4.0K"}</span>{"  "}
-        <span class="text-segment-blue">Dec 18</span>{"  "}
+        <span class="text-segment-blue">{dayjs().format("MMM DD, YYYY")}</span>{"  "}
         <span class="text-segment-blue">..</span>
       </div>
 

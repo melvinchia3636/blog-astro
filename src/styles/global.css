@@ -11,13 +11,13 @@
 
 @theme {
   /* One Dark Pro colors */
-  --color-bg-primary: #282c34;
-  --color-bg-secondary: #21252b;
-  --color-bg-tertiary: #2c313a;
+  --color-bg-primary: #22262e;
+  --color-bg-secondary: #1a1e24;
+  --color-bg-tertiary: #262b33;
 
-  --color-text-primary: #abb2bf;
-  --color-text-secondary: #828997;
-  --color-text-muted: #5c6370;
+  --color-text-primary: #c8cdd6;
+  --color-text-secondary: #9da4b0;
+  --color-text-muted: #6b7280;
 
   /* One Dark Pro accent colors */
   --color-segment-blue: #61afef;
@@ -29,6 +29,29 @@
   --color-segment-orange: #d19a66;
 
   --color-border: #3e4451;
+  --color-segment-white: #ffffff;
+}
+
+/* Light theme (One Light palette) */
+html.light {
+  --color-bg-primary: #fafafa;
+  --color-bg-secondary: #f0f0f0;
+  --color-bg-tertiary: #e4e4e4;
+
+  --color-text-primary: #383a42;
+  --color-text-secondary: #696c77;
+  --color-text-muted: #a0a1a7;
+
+  --color-segment-blue: #4078f2;
+  --color-segment-cyan: #0184bc;
+  --color-segment-green: #50a14f;
+  --color-segment-yellow: #b66c00;
+  --color-segment-magenta: #a626a4;
+  --color-segment-red: #e45649;
+  --color-segment-orange: #986801;
+
+  --color-border: #c4c4c4;
+  --color-segment-white: #bcc0c8;
 }
 
 :root {
@@ -46,6 +69,9 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   font-size: 14px;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
   @apply flex flex-col h-dvh min-h-0 p-4 sm:p-12;
 }
 
@@ -274,6 +300,123 @@ body {
     color: var(--color-segment-orange);
     padding: 0.15rem 0.4rem;
     border-radius: 3px;
+  }
+
+  /* Images */
+  figure {
+    margin: 2rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  figure img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+  }
+
+  figcaption {
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+    text-align: center;
+    font-style: italic;
+    &::before {
+      content: "# ";
+      color: var(--color-text-muted);
+      font-style: normal;
+    }
+  }
+
+  /* Image Gallery */
+  image-gallery {
+    display: block;
+    margin: 2rem 0;
+  }
+
+  /* react-image-gallery theming */
+  .image-gallery {
+    --ig-primary-color: var(--color-segment-cyan);
+    --ig-white: var(--color-text-primary);
+    --ig-black: var(--color-bg-primary);
+    --ig-background-overlay: rgba(0, 0, 0, 0.6);
+    --ig-thumbnail-border-width: 3px;
+  }
+
+  .image-gallery-content .image-gallery-slide .image-gallery-image {
+    border-radius: 6px;
+    border: 1px solid var(--color-border);
+    background: var(--color-bg-secondary);
+    max-height: 480px;
+    object-fit: contain;
+  }
+
+  .image-gallery-thumbnails-wrapper {
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: 0 0 6px 6px;
+    padding: 4px 0;
+  }
+
+  .image-gallery-thumbnail {
+    border-radius: 4px;
+    overflow: hidden;
+    opacity: 0.6;
+    transition:
+      opacity 0.2s ease,
+      border 0.2s ease;
+
+    &.active,
+    &:hover,
+    &:focus {
+      opacity: 1;
+    }
+  }
+
+  .image-gallery-thumbnail .image-gallery-thumbnail-image {
+    height: 64px;
+    object-fit: cover;
+  }
+
+  .image-gallery-description {
+    display: none;
+  }
+
+  .image-gallery-index {
+    background: var(--color-bg-tertiary);
+    color: var(--color-text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    border-bottom-left-radius: 6px;
+    padding: 4px 10px;
+    top: 0;
+    right: 0;
+  }
+
+  .image-gallery-left-nav,
+  .image-gallery-right-nav {
+    padding: 12px 8px;
+  }
+
+  .image-gallery-left-nav .image-gallery-svg,
+  .image-gallery-right-nav .image-gallery-svg {
+    height: 48px;
+    width: 24px;
+  }
+
+  .image-gallery-fullscreen-button .image-gallery-svg,
+  .image-gallery-play-button .image-gallery-svg {
+    height: 20px;
+    width: 20px;
+  }
+
+  /* Fullscreen overrides */
+  .fullscreen .image-gallery-content .image-gallery-slide .image-gallery-image {
+    max-height: 90vh;
+    border: none;
   }
 
   /* Shiki code blocks */

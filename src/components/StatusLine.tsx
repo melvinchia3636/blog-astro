@@ -30,15 +30,15 @@ export default function StatusLine({
       {/* Left side segments */}
       <div className="status-left flex items-center rounded-l-full overflow-hidden h-6 opacity-0">
         {/* OS segment */}
-        <span className="inline-flex items-center bg-white text-bg-primary pl-3 pr-1 h-6 font-semibold text-sm">
-          <Icon icon="mdi:apple" className="text-base" />
+        <span className="inline-flex items-center bg-segment-white text-bg-primary pl-3 pr-1 h-6 font-semibold text-sm">
+          <Icon icon="tabler:brand-apple" className="text-base" />
         </span>
         {/* Triangle: white -> blue */}
-        <div className="h-6 w-0 border-t-12 border-b-12 border-l-10 border-t-segment-blue border-b-segment-blue border-l-white" />
+        <div className="h-6 w-0 border-t-12 border-b-12 border-l-10 border-t-segment-blue border-b-segment-blue border-l-segment-white" />
 
         {/* Directory segment */}
         <span className="inline-flex items-center bg-segment-blue text-bg-primary pl-2 pr-1 h-6 font-semibold text-sm">
-          <Icon icon="mdi:folder" className="mr-1.5" />
+          <Icon icon="tabler:folder" className="mr-1.5" />
           {directory}
         </span>
         {/* Triangle: blue -> green */}
@@ -46,7 +46,7 @@ export default function StatusLine({
 
         {/* Git segment */}
         <span className="inline-flex items-center bg-segment-green text-bg-primary pl-2 pr-1 h-6 font-semibold text-sm">
-          <Icon icon="mdi:source-branch" className="mr-1.5" />
+          <Icon icon="tabler:git-branch" className="mr-1.5" />
           main
         </span>
         {/* Triangle: green -> transparent */}
@@ -68,10 +68,10 @@ export default function StatusLine({
         {showTime && time && (
           <>
             {/* Triangle: green -> white */}
-            <div className="h-6 w-0 border-t-12 border-b-12 border-r-10 border-t-segment-green border-b-segment-green border-r-white" />
-            <span className="inline-flex items-center bg-white text-bg-primary pl-2 pr-2 h-6 text-sm">
+            <div className="h-6 w-0 border-t-12 border-b-12 border-r-10 border-t-segment-green border-b-segment-green border-r-segment-white" />
+            <span className="inline-flex items-center bg-segment-white text-bg-primary pl-2 pr-2 h-6 text-sm">
               {time}
-              <Icon icon="mdi:clock-outline" className="ml-1.5" />
+              <Icon icon="tabler:clock" className="ml-1.5" />
             </span>
           </>
         )}

@@ -1,3 +1,5 @@
+import dayjs from "dayjs";
+
 export default function PostCard({
   slug,
   excerpt,
@@ -11,8 +13,6 @@ export default function PostCard({
 }) {
   const fileSize = `${(contentLength / 100).toFixed(1)}K`.padStart(6, " ");
   const dateParts = date.split(" ");
-  const month = dateParts[0].slice(0, 3);
-  const day = dateParts[1].replace(",", "").padStart(2, " ");
 
   return (
     <a
@@ -28,7 +28,7 @@ export default function PostCard({
         <span className="text-segment-green">{fileSize}</span>
         {"  "}
         <span className="text-segment-blue">
-          {month} {day}
+          {dayjs(date).format("MMM DD, YYYY")}
         </span>
         {"  "}
         <span className="text-segment-cyan group-hover:text-segment-magenta transition-colors">

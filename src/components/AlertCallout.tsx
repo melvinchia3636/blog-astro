@@ -9,11 +9,11 @@ interface Props {
 }
 
 const ICONS: Record<AlertType, string> = {
-  note: "mdi:information-outline",
-  tip: "mdi:lightbulb-on-outline",
-  important: "mdi:message-alert-outline",
-  warning: "mdi:alert-outline",
-  caution: "mdi:alert-octagon-outline",
+  note: "tabler:info-circle",
+  tip: "tabler:bulb",
+  important: "tabler:message-exclamation",
+  warning: "tabler:alert-triangle",
+  caution: "tabler:alert-octagon",
 };
 
 const COLORS: Record<AlertType, string> = {
@@ -41,7 +41,7 @@ export default function AlertCallout({ type, label, html }: Props) {
         <span>{label}</span>
       </div>
       <div
-        className="[&_p]:mb-0 [&_p:not(:last-child)]:mb-2"
+        className="[&_p]:mb-0! [&_p:not(:last-child)]:mb-2"
         dangerouslySetInnerHTML={{ __html: html }}
       />
     </div>

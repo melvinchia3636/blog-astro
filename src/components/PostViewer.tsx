@@ -4,6 +4,7 @@ import { Icon } from "@iconify/react";
 import StatusLine from "./StatusLine";
 import PdfAttachment from "./PdfAttachment";
 import AlertCallout from "./AlertCallout";
+import ImageGallery from "./ImageGallery";
 
 function mountComponents<El extends HTMLElement>(
   selector: string,
@@ -85,6 +86,11 @@ export default function PostViewer({
         html={el.innerHTML}
       />
     ));
+
+    mountComponents("image-gallery", (el) => {
+      const images = JSON.parse(el.dataset.images ?? "[]");
+      return <ImageGallery images={images} />;
+    });
   }, []);
 
   return (
@@ -117,7 +123,7 @@ export default function PostViewer({
           <div className="bg-bg-tertiary flex items-center text-xs border-b border-border">
             <div className="flex min-w-0 items-center gap-1.5 px-3 py-1.5 bg-bg-secondary border-r border-border text-text-primary">
               <Icon
-                icon="mdi:file-document-outline"
+                icon="tabler:file-text"
                 className="text-segment-cyan shrink-0"
               />
               <span className="truncate min-w-0">{slug}.md</span>
@@ -184,7 +190,7 @@ export default function PostViewer({
               {/* Git branch */}
               <span className="bg-bg-tertiary text-text-secondary px-2 h-full flex items-center gap-1.5">
                 <Icon
-                  icon="mdi:source-branch"
+                  icon="tabler:git-branch"
                   className="text-segment-magenta"
                 />
                 main
@@ -193,7 +199,7 @@ export default function PostViewer({
 
               {/* Filename */}
               <span className="bg-bg-secondary min-w-0 text-text-primary px-2 h-full flex items-center gap-1.5">
-                <Icon icon="mdi:file-document-outline" className="shrink-0" />
+                <Icon icon="tabler:file-text" className="shrink-0" />
                 <span className="truncate min-w-0">{slug}.md</span>
                 <span className="text-segment-green">[+]</span>
               </span>

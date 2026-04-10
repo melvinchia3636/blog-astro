@@ -1,5 +1,8 @@
 ---
-import StatusLine from '../components/StatusLine';import '../styles/tailwind.css';import '../styles/global.css';
+import StatusLine from '../components/StatusLine';
+import ThemeToggle from '../components/ThemeToggle';
+import '../styles/tailwind.css';
+import '../styles/global.css';
 
 interface Props {
   title?: string;
@@ -18,10 +21,18 @@ const currentTime = new Date().toLocaleTimeString("en-US", {
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    <script is:inline>
+      (function () {
+        var stored = localStorage.getItem('theme');
+        var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (stored === 'light' || (!stored && !prefersDark)) {
+          document.documentElement.classList.add('light');
+        }
+      })();
+    </script>
   </head>
   <body>
     <div class="h-full bg-bg-primary overflow-hidden">
@@ -37,7 +48,7 @@ const currentTime = new Date().toLocaleTimeString("en-US", {
           <span class="text-text-muted text-xs">
             melvin@blog: ~/journal
           </span>
-          <span class="text-text-muted text-xs">{currentTime}</span>
+          <ThemeToggle client:load />
         </div>
 
         <!-- Terminal Body - Scrollable -->

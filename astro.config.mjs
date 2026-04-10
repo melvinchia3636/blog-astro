@@ -5,6 +5,8 @@ import icon from "astro-icon";
 import react from "@astrojs/react";
 import { remarkAlerts } from "./src/plugins/remark-alerts.ts";
 import { remarkPdf } from "./src/plugins/remark-pdf.ts";
+import { remarkFigure } from "./src/plugins/remark-figure.ts";
+import { remarkGallery } from "./src/plugins/remark-gallery.ts";
 import { createReadStream, existsSync, statSync } from "fs";
 import { readdir, copyFile, mkdir } from "fs/promises";
 import { fileURLToPath } from "url";
@@ -71,7 +73,7 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
   markdown: {
-    remarkPlugins: [remarkAlerts, remarkPdf],
+    remarkPlugins: [remarkAlerts, remarkPdf, remarkFigure, remarkGallery],
     shikiConfig: {
       theme: "one-dark-pro",
       wrap: false,
