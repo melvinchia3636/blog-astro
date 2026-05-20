@@ -17,11 +17,28 @@ export function remarkFigure() {
         : url;
     };
 
+    const parseWidth = (title: string | null | undefined): string | null => {
+      const m = title?.match(/^w=(.+)$/);
+      return m ? m[1] : null;
+    };
+
     const makeFigure = (img: Image, indent = ""): string => {
       const src = resolveUrl(img.url);
       const alt = img.alt ?? "";
+      const width = parseWidth(img.title);
       const caption = alt ? `\n${indent}  <figcaption>${alt}</figcaption>` : "";
-      const figStyle = indent ? ` style="flex:1 1 180px;margin:0;"` : "";
+      let figStyle: string;
+      if (indent) {
+        // inside flex row: width overrides the flex basis when specified
+        figStyle = width
+          ? ` style="flex:0 0 ${width};max-width:${width};margin:0;"`
+          : ` style="flex:1 1 180px;margin:0;"`;
+      } else {
+        // standalone figure: width constrains the whole block
+        figStyle = width
+          ? ` class="figure-width" style="width:${width};margin:2rem auto;"`
+          : ` style="width:100%;margin:2rem 0;"`;
+      }
       const imgStyle = indent
         ? ` style="width:100%;height:auto;max-height:320px;object-fit:cover;"`
         : "";

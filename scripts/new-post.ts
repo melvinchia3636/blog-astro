@@ -28,7 +28,7 @@ try {
   console.error(`Error: post "${slug}" already exists at ${postDir}`);
   process.exit(1);
 } catch {
-  // expected — directory does not exist yet
+  // expected - directory does not exist yet
 }
 
 const today = new Date();
@@ -42,6 +42,10 @@ const boilerplate = `---
 title: 
 excerpt: 
 date: ${dateStr}
+image: 
+tags: []
+canonical:
+draft: false
 ---
 
 # 

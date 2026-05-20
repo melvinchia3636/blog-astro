@@ -5,12 +5,14 @@ import PostCard from '../components/PostCard';
 import { getCollection } from 'astro:content';
 import dayjs from 'dayjs';
 
-const posts = (await getCollection('posts')).sort(
-  (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
-);
+const posts = (await getCollection('posts'))
+  .filter((post) => !post.data.draft)
+  .sort(
+    (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+  );
 ---
 
-<Layout title="Melvin's Life Journal">
+<Layout title="Melvin's Life Journal" description="Just some random thoughts - a personal blog by Melvin">
   <main class="px-6 py-4">
     <div class="mb-2">
       <StatusLine client:load directory="~/blog/posts" />

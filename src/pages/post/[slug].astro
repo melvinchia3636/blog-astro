@@ -1,9 +1,10 @@
 ---
+
 import Layout from '../../layouts/Layout.astro';
 import PostViewer from '../../components/PostViewer';
 import { getCollection, render } from 'astro:content';
 
-// folder-based posts have id like "slug/index" — normalise to bare slug
+// folder-based posts have id like "slug/index" - normalise to bare slug
 
 export async function getStaticPaths() {
   const posts = await getCollection('posts');
@@ -24,7 +25,16 @@ const wordCount = post.body ? post.body.trim().split(/\s+/).length : 0;
 const readTime = `${Math.max(1, Math.round(wordCount / 200))} min read`;
 ---
 
-<Layout title={`${post.data.title} — Melvin's Life Journal`}>
+<Layout
+  title={`${post.data.title} - Melvin's Life Journal`}
+  description={post.data.excerpt}
+  url={`/post/${slug}/`}
+  canonical={post.data.canonical}
+  image={post.data.image}
+  type="article"
+  publishedTime={post.data.publishedTime}
+  tags={post.data.tags}
+>
   <PostViewer
     client:load
     slug={slug}

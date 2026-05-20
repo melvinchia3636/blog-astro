@@ -7,6 +7,11 @@ const posts = defineCollection({
     title: z.string(),
     excerpt: z.string(),
     date: z.string(),
+    image: z.string().optional(),
+    tags: z.array(z.string()).optional(),
+    canonical: z.string().url().optional(),
+    draft: z.boolean().optional(),
+    publishedTime: z.string().optional(),
   }),
 });
 

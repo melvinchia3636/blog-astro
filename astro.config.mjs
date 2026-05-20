@@ -3,6 +3,7 @@ import { defineConfig } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 import icon from "astro-icon";
 import react from "@astrojs/react";
+import sitemap from "@astrojs/sitemap";
 import { remarkAlerts } from "./src/plugins/remark-alerts.ts";
 import { remarkPdf } from "./src/plugins/remark-pdf.ts";
 import { remarkFigure } from "./src/plugins/remark-figure.ts";
@@ -68,7 +69,8 @@ function contentAssetsIntegration() {
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [icon(), react(), contentAssetsIntegration()],
+  site: "https://melvinchia.me",
+  integrations: [icon(), react(), sitemap(), contentAssetsIntegration()],
   vite: {
     plugins: [tailwindcss()],
   },

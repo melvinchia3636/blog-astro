@@ -46,7 +46,7 @@ export function remarkAlerts() {
         node.children.shift();
       }
 
-      // Emit a custom element — React hydrates it in PostViewer
+      // Emit a custom element - React hydrates it in PostViewer
       node.data = {
         ...node.data,
         hName: "alert-callout",

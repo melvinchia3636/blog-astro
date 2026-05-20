@@ -1,14 +1,15 @@
 ---
+import SEO, { type Props as SEOProps } from '../components/SEO.astro';
 import StatusLine from '../components/StatusLine';
 import ThemeToggle from '../components/ThemeToggle';
 import '../styles/tailwind.css';
 import '../styles/global.css';
 
-interface Props {
+interface Props extends SEOProps {
   title?: string;
 }
 
-const { title = "Melvin's Life Journal" } = Astro.props;
+const { title = "Melvin's Life Journal", ...seoProps } = Astro.props;
 
 const currentTime = new Date().toLocaleTimeString("en-US", {
   hour12: false,
@@ -23,6 +24,7 @@ const currentTime = new Date().toLocaleTimeString("en-US", {
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
+    <SEO title={title} {...seoProps} />
     <title>{title}</title>
     <script is:inline>
       (function () {
@@ -60,7 +62,7 @@ const currentTime = new Date().toLocaleTimeString("en-US", {
               <span class="ml-2 text-text-primary">cat journal.md</span>
             </div>
             <div class="mt-2 text-text-muted text-sm">
-              # Melvin's Life Journal — Just some random thoughts
+              # Melvin's Life Journal - Just some random thoughts
             </div>
           </header>
 

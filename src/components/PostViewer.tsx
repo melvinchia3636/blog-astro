@@ -44,11 +44,7 @@ export default function PostViewer({
     const el = contentRef.current;
     if (!el) return;
     const LINE_H = 16 * 1.8; // 1.8rem in px (base 16px)
-    const obs = new ResizeObserver(([entry]) => {
-      setGutterLines(Math.ceil(entry.contentRect.height / LINE_H));
-    });
-    obs.observe(el);
-    return () => obs.disconnect();
+    setGutterLines(Math.ceil(el.scrollHeight / LINE_H));
   }, []);
 
   useEffect(() => {
