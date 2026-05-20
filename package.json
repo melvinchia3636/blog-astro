@@ -29,7 +29,6 @@
     "react-image-gallery": "^2.1.2",
     "rehype-highlight": "^7.0.2",
     "sass-embedded": "^1.98.0",
-    "scss": "^0.2.4",
     "tailwindcss": "^4.2.2",
     "unist-util-visit": "^5.1.0"
   },
